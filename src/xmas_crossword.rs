@@ -8,9 +8,9 @@ impl From::<NonXmasLetterError> for BadInputError {
     }
 }
 
-pub struct PuzzleInput(Vec<Vec<XmasLetter>>);
+pub struct XmasCrossword(Vec<Vec<XmasLetter>>);
 
-impl TryFrom::<&str> for PuzzleInput {
+impl TryFrom::<&str> for XmasCrossword {
     type Error = BadInputError;
 
     fn try_from(value: &str) -> Result<Self, Self::Error> {
