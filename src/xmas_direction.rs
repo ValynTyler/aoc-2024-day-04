@@ -1,3 +1,4 @@
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct XmasDirections {
     north: bool,
     north_west: bool,
@@ -61,6 +62,7 @@ impl XmasDirections {
     }
 }
 
+#[derive(Clone, Copy)]
 pub enum XmasDirection {
     North,
     South,
