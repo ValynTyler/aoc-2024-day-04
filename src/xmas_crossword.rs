@@ -30,7 +30,7 @@ impl Display for XmasCrossword {
         // bottom row
         write!(f, "{BLC}{HL}")?;
         self.0.iter().for_each(|_| write!(f, "{HL}{HL}").unwrap());
-        writeln!(f, "{BRC}")?;
+        write!(f, "{BRC}")?;
 
         Ok(())
     }
