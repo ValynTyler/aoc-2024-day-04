@@ -14,15 +14,14 @@ impl TryFrom::<&str> for XmasCrossword {
     type Error = BadInputError;
 
     fn try_from(value: &str) -> Result<Self, Self::Error> {
-        let v: Vec<Vec<XmasLetter>> = value
+        Ok(Self(value
             .lines()
             .map(|line| {
                 line.chars()
                     .map(|c| c.try_into())
                     .collect::<Result<Vec<_>, _>>()
             })
-            .collect::<Result<Vec<Vec<XmasLetter>>, NonXmasLetterError>>()?;
-
-        todo!()
+            .collect::<Result<Vec<Vec<XmasLetter>>, NonXmasLetterError>>()?
+        ))
     }
 }
