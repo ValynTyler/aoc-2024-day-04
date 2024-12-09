@@ -10,7 +10,29 @@ pub struct XmasDirections {
 }
 
 impl XmasDirections {
-    fn add(&mut self, dir: XmasDirection) {
+    pub const ALL: Self = Self {
+        north: true,
+        north_west: true,
+        west: true,
+        south_west: true,
+        south: true,
+        south_east: true,
+        east: true,
+        north_east: true,
+    };
+
+    pub const NONE: Self = Self {
+        north: false,
+        north_west: false,
+        west: false,
+        south_west: false,
+        south: false,
+        south_east: false,
+        east: false,
+        north_east: false,
+    };
+
+    pub fn add(&mut self, dir: XmasDirection) {
         match dir {
             XmasDirection::North => self.north = true,
             XmasDirection::South => self.south = true,
@@ -23,7 +45,7 @@ impl XmasDirections {
         }
     }
 
-    fn directions(&self) -> Vec<XmasDirection> {
+    pub fn directions(&self) -> Vec<XmasDirection> {
         let mut v = vec![];
 
         if self.north == true { v.push(XmasDirection::North) }
