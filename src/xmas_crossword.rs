@@ -1,7 +1,7 @@
 use std::{fmt::Display, io::repeat};
 use utf8_box_builder::*;
 
-use crate::xmas_letter::{NonXmasLetterError, XmasLetter};
+use crate::{xmas_direction::XmasDirection, xmas_letter::{NonXmasLetterError, XmasLetter}};
 
 #[derive(Debug)] pub struct BadInputError;
 
@@ -21,16 +21,21 @@ impl Display for XmasCrossword {
         writeln!(f, "{TRC}")?;
 
         // middle rows
+        let mut i = 0;
         self.0.iter().for_each(|row| {
             write!(f, "{VL} ").unwrap();
             row.iter().for_each(|letter| write!(f, "{letter} ").unwrap());
-            writeln!(f, "{VL}").unwrap();
+            writeln!(f, "{VL} {i}").unwrap();
+            i += 1;
         });
 
         // bottom row
         write!(f, "{BLC}{HL}")?;
         self.0.iter().for_each(|_| write!(f, "{HL}{HL}").unwrap());
-        write!(f, "{BRC}")?;
+        writeln!(f, "{BRC}")?;
+        let mut j = 0;
+        write!(f, "  ")?;
+        self.0.iter().for_each(|_| { write!(f, "{j} ").unwrap(); j += 1; });
 
         Ok(())
     }
@@ -50,5 +55,12 @@ impl TryFrom::<&str> for XmasCrossword {
             })
             .collect::<Result<Vec<Vec<XmasLetter>>, NonXmasLetterError>>()?
         ))
+    }
+}
+
+impl XmasCrossword {
+    pub fn check(&self, cell: (isize, isize), dir: XmasDirection) {
+        let contents = &self.0[cell.0 as usize][cell.1 as usize];
+        println!("{}", contents);
     }
 }
