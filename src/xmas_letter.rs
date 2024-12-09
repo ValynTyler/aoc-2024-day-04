@@ -2,7 +2,7 @@ use std::fmt::Display;
 
 #[derive(Debug)] pub struct NonXmasLetterError;
 
-#[derive(Debug)] 
+#[derive(Debug, PartialEq)] 
 pub enum XmasLetter {
     X, M, A, S,
 }
@@ -25,4 +25,13 @@ impl TryInto::<XmasLetter> for char {
             _ => Err(NonXmasLetterError),
         }
     }
+}
+
+impl XmasLetter {
+    const XMAS: [XmasLetter; 4] = [
+        XmasLetter::X,
+        XmasLetter::M,
+        XmasLetter::A,
+        XmasLetter::S,
+    ];
 }
