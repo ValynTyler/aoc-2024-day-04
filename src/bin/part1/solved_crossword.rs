@@ -3,9 +3,9 @@ use utf8_box_builder::*;
 
 use aoc_2024_day4::xmas_crossword::XmasCrossword;
 
-use crate::xmas_direction::XmasDirection;
+use crate::xmas_direction::XmasDirections;
 
-pub struct SolvedCrossword(Vec<Vec<Option<XmasDirection>>>);
+pub struct SolvedCrossword(Vec<Vec<Option<XmasDirections>>>);
 
 impl Display for SolvedCrossword {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
