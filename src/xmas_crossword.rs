@@ -1,4 +1,5 @@
 use std::{fmt::Display, io::repeat};
+use utf8_box_builder::*;
 
 use crate::xmas_letter::{NonXmasLetterError, XmasLetter};
 
@@ -14,15 +15,6 @@ pub struct XmasCrossword(pub Vec<Vec<XmasLetter>>);
 
 impl Display for XmasCrossword {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        // box builder
-        const HL: char = '─';
-        const VL: char = '│';
-
-        const TLC: char = '┌';
-        const BLC: char = '└';
-        const TRC: char = '┐';
-        const BRC: char = '┘';
-
         // top row
         write!(f, "{TLC}{HL}")?;
         self.0.iter().for_each(|_| write!(f, "{HL}{HL}").unwrap());

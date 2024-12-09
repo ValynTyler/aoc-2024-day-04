@@ -4,3 +4,4 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+utf8-box-builder = { git="https://github.com/valyntyler/utf8-box-builder.git" }

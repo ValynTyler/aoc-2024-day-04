@@ -5,3 +5,11 @@ version = 3
 [[package]]
 name = "aoc-2024-day4"
 version = "0.1.0"
+dependencies = [
+ "utf8-box-builder",
+]
+
+[[package]]
+name = "utf8-box-builder"
+version = "0.1.0"
+source = "git+https://github.com/valyntyler/utf8-box-builder.git#ff9b18897f0765e063608f075a0bc5da490985fa"
