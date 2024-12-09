@@ -14,22 +14,31 @@ pub struct XmasCrossword(Vec<Vec<XmasLetter>>);
 
 impl Display for XmasCrossword {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        // box builder
+        const HL: char = '─';
+        const VL: char = '│';
+
+        const TLC: char = '┌';
+        const BLC: char = '└';
+        const TRC: char = '┐';
+        const BRC: char = '┘';
+
         // top row
-        write!(f, "┌─")?;
-        self.0.iter().for_each(|_| write!(f, "──").unwrap());
-        writeln!(f, "┐")?;
+        write!(f, "{TLC}{HL}")?;
+        self.0.iter().for_each(|_| write!(f, "{HL}{HL}").unwrap());
+        writeln!(f, "{TRC}")?;
 
         // middle rows
         self.0.iter().for_each(|row| {
-            write!(f, "│ ").unwrap();
+            write!(f, "{VL} ").unwrap();
             row.iter().for_each(|letter| write!(f, "{letter} ").unwrap());
-            writeln!(f, "│").unwrap();
+            writeln!(f, "{VL}").unwrap();
         });
 
         // bottom row
-        write!(f, "└─")?;
-        self.0.iter().for_each(|_| write!(f, "──").unwrap());
-        writeln!(f, "┘")?;
+        write!(f, "{BLC}{HL}")?;
+        self.0.iter().for_each(|_| write!(f, "{HL}{HL}").unwrap());
+        writeln!(f, "{BRC}")?;
 
         Ok(())
     }
