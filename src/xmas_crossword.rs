@@ -1,6 +1,8 @@
+use std::fmt::Display;
+
 use crate::xmas_letter::{NonXmasLetterError, XmasLetter};
 
-pub struct BadInputError;
+#[derive(Debug)] pub struct BadInputError;
 
 impl From::<NonXmasLetterError> for BadInputError {
     fn from(value: NonXmasLetterError) -> Self {
@@ -10,11 +12,24 @@ impl From::<NonXmasLetterError> for BadInputError {
 
 pub struct XmasCrossword(Vec<Vec<XmasLetter>>);
 
+impl Display for XmasCrossword {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        for row in &self.0 {
+            for item in row {
+                write!(f, "{} ", item)?;
+            }
+            writeln!(f)?;
+        }
+        Ok(())
+    }
+}
+
 impl TryFrom::<&str> for XmasCrossword {
     type Error = BadInputError;
 
     fn try_from(value: &str) -> Result<Self, Self::Error> {
         Ok(Self(value
+            .trim()
             .lines()
             .map(|line| {
                 line.chars()

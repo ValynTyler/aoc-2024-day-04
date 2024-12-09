@@ -1,7 +1,16 @@
-pub struct NonXmasLetterError;
+use std::fmt::Display;
 
+#[derive(Debug)] pub struct NonXmasLetterError;
+
+#[derive(Debug)] 
 pub enum XmasLetter {
     X, M, A, S,
+}
+
+impl Display for XmasLetter {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:?}", self)
+    }
 }
 
 impl TryInto::<XmasLetter> for char {
