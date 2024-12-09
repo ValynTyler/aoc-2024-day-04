@@ -14,23 +14,23 @@ pub struct XmasCrossword(Vec<Vec<XmasLetter>>);
 
 impl Display for XmasCrossword {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        // top row
         write!(f, "┌─")?;
-        for _ in 0..self.0.len() - 1 {
-            write!(f, "──")?;
-        }
-        writeln!(f, "──┐")?;
-        for row in &self.0 {
-            write!(f, "│ ")?;
-            for item in row  {
-                write!(f, "{} ", item)?;
-            }
-            writeln!(f, "│")?;
-        }
+        self.0.iter().for_each(|_| write!(f, "──").unwrap());
+        writeln!(f, "┐")?;
+
+        // middle rows
+        self.0.iter().for_each(|row| {
+            write!(f, "│ ").unwrap();
+            row.iter().for_each(|letter| write!(f, "{letter} ").unwrap());
+            writeln!(f, "│").unwrap();
+        });
+
+        // bottom row
         write!(f, "└─")?;
-        for _ in 0..self.0.len() - 1 {
-            write!(f, "──")?;
-        }
-        write!(f, "──┘")?;
+        self.0.iter().for_each(|_| write!(f, "──").unwrap());
+        writeln!(f, "┘")?;
+
         Ok(())
     }
 }
