@@ -54,14 +54,14 @@ impl XmasDirection {
     pub fn deltas(&self) -> Vec<(isize, isize)> {
         match self {
             XmasDirection::North => vec![
-                ( 0,  1),
-                ( 0,  2),
-                ( 0,  3),
+                ( 0, -1),
+                ( 0, -2),
+                ( 0, -3),
             ],
             XmasDirection::NorthWest => vec![
-                (-1,  1),
-                (-2,  2),
-                (-3,  3),
+                (-1, -1),
+                (-2, -2),
+                (-3, -3),
             ],
             XmasDirection::West => vec![
                 (-1,  0),
@@ -69,29 +69,29 @@ impl XmasDirection {
                 (-3,  0),
             ],
             XmasDirection::SouthWest => vec![
-                (-1, -1),
-                (-2, -2),
-                (-3, -3),
-            ],
-            XmasDirection::South => vec![
-                ( 0, -1),
-                ( 0, -2),
-                ( 0, -3),
-            ],
-            XmasDirection::SouthEast => vec![
                 (-1,  1),
                 (-2,  2),
                 (-3,  3),
             ],
-            XmasDirection::East => vec![
+            XmasDirection::South => vec![
                 ( 0,  1),
                 ( 0,  2),
                 ( 0,  3),
             ],
+            XmasDirection::SouthEast => vec![
+                (-1, -1),
+                (-2, -2),
+                (-3, -3),
+            ],
+            XmasDirection::East => vec![
+                ( 1,  0),
+                ( 2,  0),
+                ( 3,  0),
+            ],
             XmasDirection::NorthEast => vec![
-                ( 1,  1),
-                ( 2,  2),
-                ( 3,  3),
+                ( 1, -1),
+                ( 2, -2),
+                ( 3, -3),
             ],
         }
     }
