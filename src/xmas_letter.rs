@@ -2,7 +2,7 @@ use std::fmt::Display;
 
 #[derive(Debug)] pub struct NonXmasLetterError;
 
-#[derive(Debug, PartialEq)] 
+#[derive(Debug, Clone, Copy, PartialEq)] 
 pub enum XmasLetter {
     X, M, A, S,
 }
