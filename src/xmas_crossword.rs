@@ -10,7 +10,7 @@ impl From::<NonXmasLetterError> for BadInputError {
     }
 }
 
-pub struct XmasCrossword(Vec<Vec<XmasLetter>>);
+pub struct XmasCrossword(pub Vec<Vec<XmasLetter>>);
 
 impl Display for XmasCrossword {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
