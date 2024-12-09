@@ -2,8 +2,7 @@ use std::fmt::Display;
 use utf8_box_builder::*;
 
 use aoc_2024_day4::xmas_crossword::XmasCrossword;
-
-use crate::xmas_direction::XmasDirections;
+use aoc_2024_day4::xmas_direction::XmasDirections;
 
 pub struct SolvedCrossword(Vec<Vec<Option<XmasDirections>>>);
 
