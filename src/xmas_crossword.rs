@@ -1,4 +1,4 @@
-use std::fmt::Display;
+use std::{fmt::Display, io::repeat};
 
 use crate::xmas_letter::{NonXmasLetterError, XmasLetter};
 
@@ -14,12 +14,23 @@ pub struct XmasCrossword(Vec<Vec<XmasLetter>>);
 
 impl Display for XmasCrossword {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "┌─")?;
+        for _ in 0..self.0.len() - 1 {
+            write!(f, "──")?;
+        }
+        writeln!(f, "──┐")?;
         for row in &self.0 {
-            for item in row {
+            write!(f, "│ ")?;
+            for item in row  {
                 write!(f, "{} ", item)?;
             }
-            writeln!(f)?;
+            writeln!(f, "│")?;
         }
+        write!(f, "└─")?;
+        for _ in 0..self.0.len() - 1 {
+            write!(f, "──")?;
+        }
+        write!(f, "──┘")?;
         Ok(())
     }
 }
