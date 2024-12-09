@@ -28,7 +28,7 @@ impl TryInto::<XmasLetter> for char {
 }
 
 impl XmasLetter {
-    const XMAS: [XmasLetter; 4] = [
+    pub const XMAS: [XmasLetter; 4] = [
         XmasLetter::X,
         XmasLetter::M,
         XmasLetter::A,
