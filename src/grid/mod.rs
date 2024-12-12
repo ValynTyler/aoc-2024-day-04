@@ -1,8 +1,10 @@
 pub mod grid_direction;
 pub use grid_direction::*;
 
-use std::fmt::Display;
+use std::{fmt::Display, usize};
 use utf8_box_builder::*;
+
+use crate::vec::{Vec2ISize, Vec2USize};
 
 pub struct Grid<T>(pub Vec<Vec<T>>);
 
@@ -32,5 +34,18 @@ where T: Display {
         write!(f, "{BRC}")?;
 
         Ok(())
+    }
+}
+
+impl<T> Grid<T>
+where T: Copy {
+    pub fn get(&self, pos: Vec2USize) -> Option<T> {
+        if let Some(row) = self.0.get(pos.1) {
+            if let Some(item) = row.get(pos.0) {
+                return Some(*item)
+            }
+        }
+
+        None
     }
 }
