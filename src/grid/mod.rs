@@ -1,10 +1,10 @@
 pub mod grid_direction;
 pub use grid_direction::*;
 
-use std::{fmt::Display, usize};
+use std::fmt::Display;
 use utf8_box_builder::*;
 
-use crate::vec::{Vec2ISize, Vec2USize};
+use crate::vec::Vec2USize;
 
 pub struct Grid<T>(pub Vec<Vec<T>>);
 
