@@ -3,7 +3,7 @@ use aoc_2024_day4::vec::{Vec2ISize, Vec2USize};
 use aoc_2024_day4::xmas::{BadDataError, XmasGrid, XmasLetter};
 
 fn main() -> Result<(), BadDataError> {
-    let input_string = include_str!("../../../input/example.txt");
+    let input_string = include_str!("../../../input/crossword.txt");
     let crossword = XmasGrid::try_from(input_string)?;
     println!("{}", crossword);
 
