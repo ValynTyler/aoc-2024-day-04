@@ -48,4 +48,12 @@ where T: Copy {
 
         None
     }
+
+    pub fn width(&self) -> usize {
+        self.0[0].len()
+    }
+
+    pub fn height(&self) -> usize {
+        self.0.len()
+    }
 }
