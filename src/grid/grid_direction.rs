@@ -1,7 +1,7 @@
-use crate::vec2_isize::Vec2ISize as Vec2I;
+use crate::vec::Vec2ISize as Vec2I;
 
 #[derive(Clone, Copy)]
-pub enum Direction {
+pub enum GridDirection {
     North,
     South,
     East,
@@ -12,9 +12,9 @@ pub enum Direction {
     SouthWest,
 }
 
-impl Direction {
+impl GridDirection {
     pub fn delta(&self) -> Vec2I {
-        use Direction::*;
+        use GridDirection::*;
         match self {
             North    => Vec2I( 0, -1),
             South    => Vec2I( 0,  1),
