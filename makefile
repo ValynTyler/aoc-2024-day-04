@@ -1,4 +1,4 @@
-default: part1
+default: part2
 
 part1:
 	cargo run --bin part1
