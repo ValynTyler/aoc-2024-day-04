@@ -1,8 +1,8 @@
 pub mod grid_direction;
+pub use grid_direction::*;
+
 use std::fmt::Display;
 use utf8_box_builder::*;
-
-pub use grid_direction::*;
 
 pub struct Grid<T>(pub Vec<Vec<T>>);
 
