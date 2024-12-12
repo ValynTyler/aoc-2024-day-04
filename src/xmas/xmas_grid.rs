@@ -36,3 +36,9 @@ impl TryFrom::<&str> for XmasGrid {
         )
     }
 }
+
+impl XmasGrid {
+    pub fn grid(&self) -> &Grid<XmasLetter> {
+        &self.0
+    }
+}
