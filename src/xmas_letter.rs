@@ -1,6 +1,7 @@
 use std::fmt::Display;
 
-#[derive(Debug)] pub struct NonXmasLetterError;
+#[derive(Debug)]
+pub struct NonXmasLetterError;
 
 #[derive(Debug, Clone, Copy, PartialEq)] 
 pub enum XmasLetter {

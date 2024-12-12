@@ -3,10 +3,11 @@ use utf8_box_builder::*;
 
 use crate::{xmas_direction::XmasDirection, xmas_letter::{NonXmasLetterError, XmasLetter}};
 
-#[derive(Debug)] pub struct BadInputError;
+#[derive(Debug)]
+pub struct BadInputError;
 
 impl From::<NonXmasLetterError> for BadInputError {
-    fn from(value: NonXmasLetterError) -> Self {
+    fn from(_: NonXmasLetterError) -> Self {
         Self
     }
 }
