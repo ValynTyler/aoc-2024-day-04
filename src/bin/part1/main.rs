@@ -9,6 +9,7 @@ fn main() -> Result<(), BadDataError> {
 
     use XmasLetter::*;
     use GridDirection::*;
+
     let xmas = vec![X, M, A, S];
     let directions = vec![
         North,
@@ -21,21 +22,31 @@ fn main() -> Result<(), BadDataError> {
         SouthWest,
     ];
 
+    let width = crossword.grid().0[0].len();
+    let height = crossword.grid().0.len();
+
     let mut sum = 0;
-    for dir in directions {
-        let pos = Vec2ISize(5, 0);
-        let mut flag = true;
-        for i in 0..4 {
-            let offset = dir.delta() * i as isize;
-            if let Ok(coords) = Vec2USize::try_from(pos + offset) {
-                let letter = crossword.grid().get(coords).unwrap();
-                if letter != xmas[i] { flag = false }
-            } else {
-                flag = false
+    for i in 0..width {
+        for j in 0..height {
+            for dir in &directions {
+                let pos = Vec2ISize(i as isize, j as isize);
+                let mut flag = true;
+                for i in 0..4 {
+                    let offset = dir.delta() * i as isize;
+                    match Vec2USize::try_from(pos + offset) {
+                        Err(_) => flag = false,
+                        Ok(coords) =>{
+                            match crossword.grid().get(coords) {
+                                Some(letter) => if letter != xmas[i] { flag = false },
+                                None => flag = false,
+                            }
+                        }
+                    }
+                }
+                if flag { println!("{:?} {}", pos, dir) }
+                sum += flag as u32
             }
         }
-        println!("{}", flag);
-        sum += flag as u32
     }
     println!("{}", sum);
 

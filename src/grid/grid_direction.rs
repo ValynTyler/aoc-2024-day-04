@@ -1,6 +1,8 @@
+use std::fmt::Display;
+
 use crate::vec::Vec2ISize as Vec2I;
 
-#[derive(Clone, Copy)]
+#[derive(Debug, Clone, Copy)]
 pub enum GridDirection {
     North,
     South,
@@ -10,6 +12,12 @@ pub enum GridDirection {
     NorthWest,
     SouthEast,
     SouthWest,
+}
+
+impl Display for GridDirection {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:?}", self)
+    }
 }
 
 impl GridDirection {
