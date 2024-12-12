@@ -1,4 +1,4 @@
-use aoc_2024_day4::{grid::GridDirection, vec::{Vec2ISize, Vec2USize}, xmas::{BadDataError, XmasGrid, XmasLetter}};
+use aoc_2024_day4::{grid::GridDirection, vec::Vec2ISize, xmas::{BadDataError, XmasGrid, XmasLetter}};
 
 fn main() -> Result<(), BadDataError> {
     let input_string = include_str!("../../../input/crossword.txt");
