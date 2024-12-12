@@ -5,37 +5,34 @@ fn main() -> Result<(), BadDataError> {
     let crossword = XmasGrid::try_from(input_string)?;
     println!("{}", crossword);
 
-    let _width = crossword.grid().width();
-    let _height = crossword.grid().height();
+    let width = crossword.grid().width();
+    let height = crossword.grid().height();
 
     use GridDirection::*;
     use XmasLetter::*;
 
-    let pos = Vec2ISize(2, 1);
-    let valid = (crossword.grid().get(pos.try_into().unwrap()) == Some(A)) && ((
-        crossword.grid().get((pos + NorthWest.delta()).try_into().unwrap()) == Some(M) &&
-        crossword.grid().get((pos + SouthEast.delta()).try_into().unwrap()) == Some(S)
-    ) || (
-        crossword.grid().get((pos + NorthWest.delta()).try_into().unwrap()) == Some(S) &&
-        crossword.grid().get((pos + SouthEast.delta()).try_into().unwrap()) == Some(M)
-    )) && ((
-        crossword.grid().get((pos + NorthEast.delta()).try_into().unwrap()) == Some(M) &&
-        crossword.grid().get((pos + SouthWest.delta()).try_into().unwrap()) == Some(S)
-    ) || (
-        crossword.grid().get((pos + NorthEast.delta()).try_into().unwrap()) == Some(S) &&
-        crossword.grid().get((pos + SouthWest.delta()).try_into().unwrap()) == Some(M)
-    ));
-    println!("{}", valid);
+    let mut sum = 0;
+    for i in 0..width {
+        for j in 0..height {
+            let pos = Vec2ISize(i as isize, j as isize);
+            let valid = (crossword.grid().get(pos.try_into().unwrap()) == Some(A)) && ((
+                if let Ok(coords) = (pos + NorthWest.delta()).try_into() { crossword.grid().get(coords) == Some(M) } else { false } &&
+                if let Ok(coords) = (pos + SouthEast.delta()).try_into() { crossword.grid().get(coords) == Some(S) } else { false }
+            ) || (
+                if let Ok(coords) = (pos + NorthWest.delta()).try_into() { crossword.grid().get(coords) == Some(S) } else { false } &&
+                if let Ok(coords) = (pos + SouthEast.delta()).try_into() { crossword.grid().get(coords) == Some(M) } else { false }
+            )) && ((
+                if let Ok(coords) = (pos + NorthEast.delta()).try_into() { crossword.grid().get(coords) == Some(M) } else { false } &&
+                if let Ok(coords) = (pos + SouthWest.delta()).try_into() { crossword.grid().get(coords) == Some(S) } else { false }
+            ) || (
+                if let Ok(coords) = (pos + NorthEast.delta()).try_into() { crossword.grid().get(coords) == Some(S) } else { false } &&
+                if let Ok(coords) = (pos + SouthWest.delta()).try_into() { crossword.grid().get(coords) == Some(M) } else { false }
+            ));
 
-    // let pos = Vec2USize(2, 1);
-    // let asdf = (crossword.grid().get(pos) == Some(A)) && ((
-    //     if let Ok(offset) = NorthWest.delta().try_into() { crossword.grid().get(pos + offset) == Some(M) } else { false } &&
-    //     if let Ok(offset) = SouthEast.delta().try_into() { crossword.grid().get(pos + offset) == Some(S) } else { false }
-    // ) || (
-    //     if let Ok(offset) = NorthWest.delta().try_into() { crossword.grid().get(pos + offset) == Some(S) } else { false } &&
-    //     if let Ok(offset) = SouthEast.delta().try_into() { crossword.grid().get(pos + offset) == Some(M) } else { false }
-    // ));
-    // println!("{}", asdf);
+            sum += valid as u32
+        }
+    }
+    println!("{}", sum);
 
     Ok(())
 }
