@@ -1,16 +1,10 @@
-use aoc_2024_day4::xmas_crossword::{BadInputError, XmasCrossword};
-use solved_crossword::SolvedCrossword;
+use aoc_2024_day4::{grid::Grid, xmas_crossword::BadInputError};
 
 mod solved_crossword;
 
 fn main() -> Result<(), BadInputError> {
-    let input_string = include_str!("../../../input/example.txt");
-
-    let crossword: XmasCrossword = input_string.try_into()?;
-    println!("{}", crossword);
-
-    let solution: SolvedCrossword = crossword.into();
-    println!("{}", solution);
+    let grid = Grid(vec![vec![1, 2, 3, 4], vec![1, 3, 2, 4]]);
+    println!("{}", grid);
 
     Ok(())
 }
