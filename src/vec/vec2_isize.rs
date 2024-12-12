@@ -1,5 +1,7 @@
 use std::ops::{Add, Mul};
 
+use super::Vec2USize;
+
 #[derive(Debug, Clone, Copy)]
 pub struct Vec2ISize(pub isize, pub isize);
 
@@ -16,5 +18,11 @@ impl Mul::<isize> for Vec2ISize {
 
     fn mul(self, rhs: isize) -> Self::Output {
         Self(self.0 * rhs, self.1 * rhs)
+    }
+}
+
+impl From::<Vec2USize> for Vec2ISize {
+    fn from(value: Vec2USize) -> Self {
+        Self(value.0 as isize, value.1 as isize)
     }
 }
