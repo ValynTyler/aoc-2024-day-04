@@ -11,21 +11,24 @@ where T: Display {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         // top row
         write!(f, "{TLC}{HL}")?;
-        self.0[0].iter().for_each(|_| write!(f, "{HL}{HL}").unwrap());
+        let res: Result<Vec<_>, _> = self.0[0].iter().map(|_| write!(f, "{HL}{HL}")).collect();
+        res?;
         writeln!(f, "{TRC}")?;
 
         // middle rows
-        self.0.iter().for_each(|row| {
-            write!(f, "{VL} ").unwrap();
-            row.iter().for_each(|item| {
-                write!(f, "{item} ").unwrap()
-            });
-            writeln!(f, "{VL}").unwrap();
-        });
+        let _: Result<Vec<_>, _> = self.0.iter().map(|row| {
+            write!(f, "{VL} ")?;
+            let res: Result<Vec<_>, _> = row.iter().map(|item| {
+                write!(f, "{item} ")
+            }).collect();
+            res?;
+            writeln!(f, "{VL}")
+        }).collect();
 
         // bottom row
         write!(f, "{BLC}{HL}")?;
-        self.0[0].iter().for_each(|_| write!(f, "{HL}{HL}").unwrap());
+        let res: Result<Vec<_>, _> = self.0[0].iter().map(|_| write!(f, "{HL}{HL}")).collect();
+        res?;
         write!(f, "{BRC}")?;
 
         Ok(())
