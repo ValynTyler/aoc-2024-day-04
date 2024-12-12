@@ -14,16 +14,16 @@ impl Display for XmasLetter {
     }
 }
 
-impl TryInto::<XmasLetter> for char {
+impl TryFrom::<char> for XmasLetter {
     type Error = NonXmasLetterError;
 
-    fn try_into(self) -> Result<XmasLetter, Self::Error> {
-        match self {
+    fn try_from(value: char) -> Result<Self, Self::Error> {
+        match value {
             'X' => Ok(XmasLetter::X),
             'M' => Ok(XmasLetter::M),
             'A' => Ok(XmasLetter::A),
             'S' => Ok(XmasLetter::S),
-            _ => Err(NonXmasLetterError),
+            _ => Err(NonXmasLetterError)
         }
     }
 }
